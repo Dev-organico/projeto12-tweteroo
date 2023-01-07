@@ -6,18 +6,8 @@ app.use(express.json())
 app.use(cors());
 const PORT = 5000
 
-const users = [{
-    username: 'bobesponja',
-    avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info"
-}]
-const tweets = [{
-    username: "bobesponja",
-    tweet: "eu amo o hub"
-},
-{
-    username: "bobesponja",
-    tweet: "eu odeio o hub"
-}]
+const users = []
+const tweets = []
 
 app.post("/sign-up", (req, res) => {
     const user = req.body
