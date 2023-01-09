@@ -12,6 +12,11 @@ const tweets = []
 app.post("/sign-up", (req, res) => {
     const user = req.body
 
+    if(user.username.length === 0 || typeof(user.username) !== "string" || user.username === null) return res.sendStatus(400)
+
+    if(user.avatar.length === 0 || typeof(user.avatar) !== "string" || user.avatar === null) return res.sendStatus(400)
+
+
     users.push(user)
 
     res.status(200).send("OK")
@@ -21,6 +26,10 @@ app.post("/sign-up", (req, res) => {
 app.post("/tweets", (req, res) => {
 
     const tweet = req.body
+
+    if(tweet.username.length === 0 || typeof(tweet.username) !== "string" || !tweet.username) return res.sendStatus(400)
+
+    if(tweet.tweet.length === 0 || typeof(tweet.tweet !== "string" || !tweet.tweet)) return res.sendStatus(400)
 
 
     if (!users.find(el => el.username === tweet.username)) return res.send("UNAUTHORIZED")
