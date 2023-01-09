@@ -6,7 +6,10 @@ app.use(express.json())
 app.use(cors());
 const PORT = 5000
 
-const users = []
+const users = [{
+    username: "bobesponja",
+		avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info"
+}]
 const tweets = []
 
 app.post("/sign-up", (req, res) => {
@@ -30,7 +33,7 @@ app.post("/tweets", (req, res) => {
 
     if(!users.find(el => el.username === tweet.username)) return res.status(401).send("UNAUTHORIZED")
 
-    if(!tweet.tweet || typeof(tweet.twee) !== "string" ) return res.status(400).send("Todos os campos são obrigatórios!")
+    if(!tweet.tweet || typeof(tweet.tweet) !== "string" ) return res.status(400).send("Todos os campos são obrigatórios!")
 
     
 
