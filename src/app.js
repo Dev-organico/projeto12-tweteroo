@@ -42,9 +42,7 @@ app.post("/tweets", (req, res) => {
 
 })
 
-app.get("/tweets/:USERNAME", (req, res) => {
-
-    userName = req.params.USERNAME
+app.get("/tweets", (req, res) => {
 
     const lastTen = (tweets.slice(-10, tweets.length))
 
@@ -52,7 +50,7 @@ app.get("/tweets/:USERNAME", (req, res) => {
 
     lastTen.forEach(el => {
         users.find(i => {
-            if (el.username === userName) {
+            if (el.username === i.username) {
                 newLast.push({
                     username: i.username,
                     avatar: i.avatar,
@@ -65,10 +63,32 @@ app.get("/tweets/:USERNAME", (req, res) => {
 
 
 
-    res.status(200).send(newLast)
+    res.send(newLast)
 
 })
 
+app.get("/tweets/:username", (req, res) => {
+
+    userName = req.params.username
+
+    const userTw = tweets.filter(el => el.username === userName)
+
+    let newLast = []
+
+    userTw.forEach(el => {
+                newLast.push({
+                    username: i.username,
+                    avatar: i.avatar,
+                    tweet: el.tweet
+                })
+            })
+
+
+
+
+    res.send(newLast)
+
+})
 
 
 app.listen(PORT, () => {
