@@ -12,14 +12,15 @@ const tweets = []
 app.post("/sign-up", (req, res) => {
     const user = req.body
 
-    if(user.username.length === 0 || typeof(user.username) !== "string" || user.username === null) return res.sendStatus(400)
+    if(!user.avatar|| !user.username) return res.status(400).send("Todos os campos são obrigatórios!")
 
-    if(user.avatar.length === 0 || typeof(user.avatar) !== "string" || user.avatar === null) return res.sendStatus(400)
+    if(typeof(user.username) !== "string" || typeof(user.avatar) !== "string" ) return res.sendStatus(400)
 
+
+   
 
     users.push(user)
-
-    res.status(200).send("OK")
+    res.status(201).send("OK")
 
 })
 
@@ -27,15 +28,15 @@ app.post("/tweets", (req, res) => {
 
     const tweet = req.body
 
-    if(tweet.username.length === 0 || typeof(tweet.username) !== "string" || !tweet.username) return res.sendStatus(400)
+    if(tweet.username.length === 0 || typeof(tweet.username) !== "string" || !tweet.username) return res.status(400).send("Todos os campos são obrigatórios!")
 
-    if(tweet.tweet.length === 0 || typeof(tweet.tweet !== "string" || !tweet.tweet)) return res.sendStatus(400)
+    if(tweet.tweet.length === 0 || typeof(tweet.tweet !== "string" || !tweet.tweet)) return res.status(400).send("Todos os campos são obrigatórios!")
 
 
-    if (!users.find(el => el.username === tweet.username)) return res.send("UNAUTHORIZED")
+    if (!users.find(el => el.username === tweet.username)) return res.status(401).send("UNAUTHORIZED")
 
     tweets.push(tweet)
-    res.send("OK")
+    res.status(201).send("OK")
 
 })
 
