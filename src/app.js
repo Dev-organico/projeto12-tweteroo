@@ -28,9 +28,11 @@ app.post("/tweets", (req, res) => {
 
     const tweet = req.body
 
-    if(!tweet.tweet|| typeof(tweet.twee) !== "string" ) return res.status(400).send("Todos os campos são obrigatórios!")
+    if(!users.find(el => el.username === tweet.username)) return res.status(401).send("UNAUTHORIZED")
 
-    if (!users.find(el => el.username === tweet.username)) return res.status(401).send("UNAUTHORIZED")
+    if(!tweet.tweet || typeof(tweet.twee) !== "string" ) return res.status(400).send("Todos os campos são obrigatórios!")
+
+    
 
     tweets.push(tweet)
     res.status(201).send("OK")
