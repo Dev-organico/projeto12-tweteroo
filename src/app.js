@@ -67,11 +67,12 @@ app.get("/tweets", (req, res) => {
 
 })
 
-app.get("/tweets/:username", (req, res) => {
+app.get("/tweets/:USERNAME", (req, res) => {
 
-    userName = req.params.username
+    const userName  = req.params.USERNAME
 
     const userTw = tweets.filter(el => el.username === userName)
+    res.send(userTw)
 
     let newLast = []
 
